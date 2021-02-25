@@ -1,0 +1,217 @@
+%% AMS-LaTeX Created with the Wolfram Language : www.wolfram.com
+
+\documentclass{article}
+\usepackage{amsmath, amssymb, graphics, setspace}
+
+\newcommand{\mathsym}[1]{{}}
+\newcommand{\unicode}[1]{{}}
+
+\newcounter{mathematicapage}
+\begin{document}
+
+\begin{doublespace}
+\noindent\(\pmb{\text{(*loss function *)}}\)
+\end{doublespace}
+
+\begin{doublespace}
+\noindent\(\pmb{p= \prod _{i\in y_i==1}^N p_1\left(z_i\right){}^{y_i}\text{  }*\text{   }\prod _{i\in y_i==0}^N p_0\left(z_i\right){}^{1-y_i}}\\
+\pmb{z_i=\text{WX}_i}\\
+\pmb{z_i=(W)_{1,D}\left(X_i\right)_{D,1}}\\
+\pmb{\underset{w}{\text{argmax}} p}\\
+\pmb{}\\
+\pmb{}\\
+\pmb{}\\
+\pmb{}\\
+\pmb{}\\
+\pmb{}\\
+\pmb{}\\
+\pmb{}\\
+\pmb{}\\
+\pmb{\text{*)}_{\text{   }}}\\
+\pmb{p_0\left(z_i\right)+p_1\left(z_i\right)=1}\\
+\pmb{\text{let} p_1=\sigma \left(z_i\right), p_0=1-\sigma \left(z_i\right)}\\
+\pmb{\sigma  \left(z_i\right)=\frac{e^{z_i}}{e^0+e^{z_i}}\text{  }\text{(*} \text{compare} z_i \text{to} 0 \text{*)}}\\
+\pmb{\text{(*}}\\
+\pmb{\text{softmax}_2==\text{sigmoid}}\\
+\pmb{\sigma ==\text{sigmoid}}\\
+\pmb{\sigma \left(z_i\right) == \sigma @z_i}\\
+\pmb{\text{*)}}\\
+\pmb{}\\
+\pmb{p = \prod _{i\in y_i==1}^N \left(\sigma @z_i\right){}^{y_i}\text{  }*\text{  }\prod _{i\in y_i==0}^N \left(1-\sigma @z_i\right){}^{1-y_i}}\\
+\pmb{\log  p= \sum _{i\in y_i==1}^N y_i\text{  }\log  \left(\sigma @z_i\right) + \sum _{i\in y_i==0}^N \left(1-y_i\right) \log \left(1-\sigma @z_i\right)}\\
+\pmb{\underset{w}{\text{argmax}} p == \underset{w}{\text{argmax}} \log  p == \underset{w}{\text{argmin}} -\log  p}\\
+\pmb{\text{let} L == - \log  p}\\
+\pmb{}\\
+\pmb{L = -\left( \sum _{i\in y_i==1}^N y_i \log \left(\sigma @z_i\right)\text{    }+\text{  }\sum _{i\in y_i==0}^N \left(1-y_i\right) \log \left(1-\sigma
+@z_i\right) \right)}\\
+\pmb{\underset{w}{\text{argmin}} L}\\
+\pmb{\text{(*}\text{   }L \text{shape}: \text{scalar}\text{  },}\\
+\pmb{N:\text{sample} \text{count},}\\
+\pmb{i\in [1,N],}\\
+\pmb{D: \text{sample} \text{width},}\\
+\pmb{k \in  [1,D] ,}\\
+\pmb{X_{i,k} : \text{scalar},}\\
+\pmb{\text{  }\text{*)} }\\
+\pmb{z_i=\text{wX}_i =\text{   }\sum _{k=1}^D w_kX_{i,k}}\\
+\pmb{\frac{\partial z_i}{\partial w_k}=X_{i,k}}\)
+\end{doublespace}
+
+\begin{doublespace}
+\noindent\(\pmb{\text{}}\)
+\end{doublespace}
+
+\begin{doublespace}
+\noindent\(\pmb{\text{(*gradient of loss to weight*)}}\\
+\pmb{\frac{\partial L}{\partial w_k}=\frac{1}{\partial w_k}\left(-\partial \left( \sum _{i\in y_i==1}^N y_i \log \left(\sigma @z_i\right)\text{ 
+  }+\text{  }\sum _{i\in y_i==0}^N \left(1-y_i\right) \log \left(1-\sigma @z_i\right) \right)\right)}\\
+\pmb{=\frac{1}{\partial w_k}\left(-\left( \sum _{i\in y_i==1}^N y_i \partial \log \left(\sigma @z_i\right)\text{    }+\text{  }\sum _{i\in y_i==0}^N
+\left(1-y_i\right) \partial \log \left(1-\sigma @z_i\right) \right)\right)}\\
+\pmb{=-\left( \sum _{i\in y_i==1}^N y_i \frac{\partial \log \left(\sigma @z_i\right)}{\partial w_k}\text{    }+\text{  }\sum _{i\in y_i==0}^N \left(1-y_i\right)
+\frac{\partial \log \left(1-\sigma @z_i\right)}{\partial w_k} \right)}\\
+\pmb{\text{(*}\text{        }d \left(\sigma @z_i\right)=\left(\sigma @z_i\right) \left(1-\sigma @z_i \right) \text{dz}_i\text{      },\text{see}
+\text{{``}sigmoid deravetive{''}}\text{  }\text{*)}}\\
+\pmb{\frac{\partial \log \left(\sigma @z_i\right)}{\partial w_k}=\frac{1}{\sigma @z_i}\frac{\partial \left(\sigma @z_i\right)}{\partial w_k}}\\
+\pmb{\frac{\partial \log \left(\sigma @z_i\right)}{\partial w_k}=\frac{1}{\sigma @z_i}\left(\sigma @z_i\right) \left(1-\sigma @z_i \right) \frac{\partial
+z_i}{\partial w_k}=\left(1-\sigma @z_i \right) X_{i,k}}\\
+\pmb{}\\
+\pmb{ \frac{\partial \log \left(1-\sigma @z_i\right)}{\partial w_k}=\frac{1}{1-\sigma @z_i}\frac{\partial \left(1-\sigma @z_i\right)}{\partial w_k}}\\
+\pmb{\frac{\partial \left(1-\sigma @z_i\right)}{\partial w_k}=-\frac{\partial \sigma @z_i}{\partial w_k}}\\
+\pmb{\frac{\partial \log \left(1-\sigma @z_i\right)}{\partial w_k}=\frac{1}{1-\sigma @z_i}\left(-\left(\sigma @z_i\right) \left(1-\sigma @z_i \right)\text{
+ }\frac{\partial z_i}{\partial w_k}\right)=-\left(\sigma @z_i\right) X_{i,k}}\\
+\pmb{\frac{\partial L}{\partial w_k}=-\left( \sum _{i\in y_i==1}^N y_i \left(1-\sigma @z_i \right)\text{  }X_{i,k}\text{    }+\text{  }\sum _{i\in
+y_i==0}^N \left(1-y_i\right) \left(-\left(\sigma @z_i\right)X_{i,k} \right)\right)}\\
+\pmb{\sum _{i\in y_i==0}^N \left(1-y_i\right) \left(-\left(\sigma @z_i\right) X_{i,k}\right)=\sum _{i\in y_i==0}^N \left(y_i-1\right) \left(\sigma
+@z_i\right) X_{i,k} }\\
+\pmb{\frac{\partial L}{\partial w_k}=-\left( \sum _{i\in y_i==1}^N y_i \left(1-\sigma @z_i \right)X_{i,k}\text{    }+\text{  }\sum _{i\in y_i==0}^N
+\left(y_i-1\right) \left(\sigma @z_i\right)X_{i,k}\right) }\\
+\pmb{\sum _{i\in y_i==0}^N y_i \left(1-\sigma @z_i \right)X_{i,k} =0,\sum _{i\in y_i==1}^N \left(y_i-1\right) \left(\sigma @z_i\right)X_{i,k}=0}\\
+\pmb{\frac{\partial L}{\partial w_k}=-\left( \sum _{i\in [1,N]}^N y_i \left(1-\sigma @z_i \right)X_{i,k}\text{    }+\text{  }\sum _{i\in [1,N]}^N
+\left(y_i-1\right) \left(\sigma @z_i\right)X_{i,k}\right) }\\
+\pmb{\frac{\partial L}{\partial w_k}=-\left( \sum _{i\in [1,N]}^N \left(y_i \left(1-\sigma @z_i \right)X_{i,k}+\left(y_i-1\right) \left(\sigma @z_i\right)
+\right)X_{i,k}\right) }\\
+\pmb{y_i \left(1-\sigma @z_i \right)+\left(y_i-1\right) \left(\sigma @z_i\right)=y_i-y_i\text{    }\sigma @z_i\text{   }+y_i\text{  }\sigma @z_i-\sigma
+@z_i\text{  }= y_i -\sigma @z_i}\\
+\pmb{\frac{\partial L}{\partial w_k}=- \sum _{i\in [1,N]}^N \left(y_i -\sigma @z_i \right)X_{i,k}}\\
+\pmb{}\\
+\pmb{}\\
+\pmb{}\)
+\end{doublespace}
+
+\begin{doublespace}
+\noindent\(\pmb{\text{(*result matrix*)}}\)
+\end{doublespace}
+
+\begin{doublespace}
+\noindent\(\pmb{\frac{\partial L}{\partial w_k}=- \sum _{i\in [1,N]}^N \left(y_i -\sigma @z_i \right)X_{i,k}}\\
+\pmb{W=\left(
+\begin{array}{c}
+ w_1 \\
+ w_2 \\
+ \text{...} \\
+ w_k \\
+ \text{...} \\
+ w_D \\
+\end{array}
+\right)_{1,D}}\\
+\pmb{\frac{\partial L}{\partial (W)_{1,D}}=-\left(
+\begin{array}{c}
+ \sum _{i\in [1,N]}^N \left(y_i -\sigma @z_i \right)X_{i,1} \\
+ \sum _{i\in [1,N]}^N \left(y_i -\sigma @z_i \right)X_{i,2} \\
+ \text{...} \\
+ \sum _{i\in [1,N]}^N \left(y_i -\sigma @z_i \right)X_{i,k} \\
+ \text{...} \\
+ \sum _{i\in [1,N]}^N \left(y_i -\sigma @z_i \right)X_{i,D} \\
+\end{array}
+\right){}_{1,D}}\\
+\pmb{\frac{\partial L}{\partial (W)_{1,D}}=-\left(
+\begin{array}{c}
+ \square  \\
+ \text{...} \\
+ \left(y_1 -\sigma @z_1 \right)X_{1,k}+\left(y_2 -\sigma @z_2 \right)X_{2,k}+\text{...}+\left(y_i -\sigma @z_i \right)X_{i,k}+\text{...}+\left(y_N
+-\sigma @z_N \right)X_{N,k} \\
+ \text{...} \\
+ \left(y_1 -\sigma @z_1 \right)X_{1,D}+\left(y_2 -\sigma @z_2 \right)X_{2,D}+\text{...}+\left(y_i -\sigma @z_i \right)X_{i,D}+\text{...}+\left(y_N
+-\sigma @z_N \right)X_{N,D} \\
+\end{array}
+\right)_{1,D}}\\
+\pmb{\frac{\partial L}{\partial (W)_{1,D}}=-\left(
+\begin{array}{cccccc}
+ y_1 -\sigma @z_1  & y_2 -\sigma @z_2 & \text{...} & y_i -\sigma @z_i & \text{...} & y_N -\sigma @z_N \\
+\end{array}
+\right)_{1,N}\left(
+\begin{array}{cccccc}
+ \square  & \square  & \square  & X_{1,k} & \square  & X_{1,D} \\
+ \square  & \square  & \square  & X_{2,k} & \square  & X_{2,D} \\
+ \text{...} & \text{...} & \text{...} & \text{...} & \text{...} & \text{...} \\
+ X_{i,1} & X_{i,2} & \text{...} & X_{i,k} & \text{...} & X_{i,D} \\
+ \text{...} & \text{...} & \text{...} & \text{...} & \text{...} & \text{...} \\
+ \square  & \square  & \square  & X_{N,k} & \square  & X_{N,D} \\
+\end{array}
+\right)_{N,D}}\\
+\pmb{}\\
+\pmb{\left(
+\begin{array}{cccccc}
+ y_1 -\sigma @z_1  & y_2 -\sigma @z_2 & \text{...} & y_i -\sigma @z_i & \text{...} & y_N -\sigma @z_N \\
+\end{array}
+\right)_{1,N}=\left(
+\begin{array}{cccccc}
+ y_1\text{   } & y_2\text{  } & \text{...} & y_i\text{  } & \text{...} & y_N\text{  } \\
+\end{array}
+\right)_{1,N} - \left(
+\begin{array}{cccccc}
+  \sigma @z_1  &  \sigma @z_2 & \text{...} &  \sigma @z_i & \text{...} &  \sigma @z_N \\
+\end{array}
+\right)_{1,N}}\\
+\pmb{}\\
+\pmb{\left(
+\begin{array}{cccccc}
+  \sigma @z_1  &  \sigma @z_2 & \text{...} &  \sigma @z_i & \text{...} &  \sigma @z_N \\
+\end{array}
+\right)_{1,N}=\sigma @\left(
+\begin{array}{cccccc}
+  z_1  &  z_2 & \text{...} &  z_i & \text{...} &  z_N \\
+\end{array}
+\right)_{1,N}}\\
+\pmb{}\\
+\pmb{\frac{\partial L}{\partial (W)_{1,D}}=-\left(\left(
+\begin{array}{cccccc}
+ y_1\text{   } & y_2\text{  } & \text{...} & y_i\text{  } & \text{...} & y_N\text{  } \\
+\end{array}
+\right)_{1,N} -\sigma @\left(
+\begin{array}{cccccc}
+  z_1  &  z_2 & \text{...} &  z_i & \text{...} &  z_N \\
+\end{array}
+\right)_{1,N} \right)\left(
+\begin{array}{cccc}
+ \square  & \square  & \square  & \square  \\
+ \text{...} & \text{...} & \text{...} & \text{...} \\
+ X_{i,1} & X_{i,2} & \text{...} & X_{i,D} \\
+ \text{...} & \text{...} & \text{...} & \text{...} \\
+ \square  & \square  & \square  & \square  \\
+\end{array}
+\right)_{N,D}}\\
+\pmb{\frac{\partial L}{\partial (W)_{1,D}}=-\left( (Y)_{1,N} - \sigma @(Z)_{1,N}\text{  }\right)\text{  }(X)_{N,D}}\\
+\pmb{}\\
+\pmb{}\\
+\pmb{}\)
+\end{doublespace}
+
+\begin{doublespace}
+\noindent\(\pmb{\text{(*sigmoid deravetive*)}}\\
+\pmb{\sigma (z) = \frac{e^z}{e^0+e^z}}\\
+\pmb{\sigma (z) = \frac{e^z}{e^0+e^z}=e^z\left(e^0+e^z\right)^{-1}}\\
+\pmb{d \sigma (z) = d \left( e^z\left(e^0+e^z\right)^{-1} \right) = e^z d \left(\left(e^0+e^z\right)^{-1}\right)\text{  }+ d\left( e^z\right) \left(e^0+e^z\right)^{-1}
+}\\
+\pmb{ d \left(\left(e^0+e^z\right)^{-1}\right) =-1\left(e^0+e^z\right)^{-2}d\left(e^0+e^z\right)}\\
+\pmb{d\left(e^0+e^z\right)=d\left(e^z\right)}\\
+\pmb{d\left(e^z\right)=e^zdz}\\
+\pmb{d \sigma (z)=e^z\left(-1\left(e^0+e^z\right)^{-2}e^z\right)+e^z\left(e^0+e^z\right)^{-1} =\frac{-e^ze^z}{\left(e^0+e^z\right)^2}+\frac{e^z}{e^0+e^z}=\frac{e^z}{e^0+e^z}\left(\frac{-e^z}{e^0+e^z}+1\right)dz}\\
+\pmb{d \sigma (z)=\sigma (z)  (1-\sigma (z)\text{  })dz}\\
+\pmb{d (\sigma @z)=(\sigma @z) (1-\sigma @z )dz}\)
+\end{doublespace}
+
+\begin{doublespace}
+\noindent\(\pmb{\text{}}\)
+\end{doublespace}
+
+\end{document}
